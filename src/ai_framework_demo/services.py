@@ -1,14 +1,10 @@
 from dataclasses import dataclass
-from enum import StrEnum
-
-
-class MealTime(StrEnum):
-    DINNER = "dinner"
-    LUNCH = "lunch"
 
 
 @dataclass
 class Order:
+    """Data structure to represent and order for a table"""
+
     menu_items: list[str]
     table_number: int
 

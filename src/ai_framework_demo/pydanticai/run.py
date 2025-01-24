@@ -1,24 +1,19 @@
 import argparse
 
 import logfire
+from pydantic_ai.messages import ModelMessage
 
 from ai_framework_demo.pydanticai.agent import (
-    Dependencies,
-    build_model_from_name_and_api_key,
     get_agent,
 )
+from ai_framework_demo.pydanticai.deps import Dependencies
 from ai_framework_demo.services import MenuService, OrderService
 
 
-async def run_pydanticai(args: argparse.Namespace):
+def run_pydanticai(args: argparse.Namespace):
     logfire.configure(send_to_logfire="if-token-present", console=None if args.debug else False)
 
-    model = build_model_from_name_and_api_key(
-        model_name=args.model,
-        api_key=args.api_key,
-    )
-
-    agent = get_agent(model)
+    agent = get_agent(model_name=args.model, api_key=args.api_key)
 
     # Initialize services
     menu_service = MenuService()
@@ -32,24 +27,24 @@ async def run_pydanticai(args: argparse.Namespace):
         table_number=args.table_number,
     )
 
-    greeting_response = await agent.run(
-        "*Greet the customer*",
-        deps=deps,
-    )
+    message_history: list[ModelMessage] = []
+    user_message = "*Greet the customer*"
 
-    message_history = greeting_response.all_messages()
-    print("AI Waiter: ", greeting_response.data)
     while True:
-        user_input = input("You: ")
-        ai_response = await agent.run(
-            user_input,
+        ai_response = agent.run_sync(
+            user_message,
             deps=deps,
             message_history=message_history,
         )
-        print("AI Waiter: ", ai_response.data)
-
         message_history = ai_response.all_messages()
-        # Exit if order has been placed
-        if orders := order_service.get_orders():
-            print("Order placed: ", orders)
+        print("AI Waiter: ", ai_response.data.message)
+
+        # Exit if LLM indicates conversation is over
+        if ai_response.data.end_conversation:
             break
+
+        user_message = input("You: ")
+
+    # Show orders
+    if orders := order_service.get_orders():
+        print("Order placed: ", orders)

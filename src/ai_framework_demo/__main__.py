@@ -1,5 +1,4 @@
 import argparse
-import asyncio
 import os
 from collections import defaultdict
 from typing import Literal, get_args
@@ -88,10 +87,10 @@ def main() -> None:
         )
 
     if args.framework == "pydanticai":
-        asyncio.run(run_pydanticai(args))
 
     else:  # langchain
         raise NotImplementedError("Langchain implementation coming soon!")
+        run_pydanticai(args)
 
 
 if __name__ == "__main__":
