@@ -40,11 +40,13 @@ class MenuService:
 
 
 class OrderService:
+    orders: list[Order]
+
     def __init__(self):
         self.orders = []
 
     def create_order(self, table_number: int, menu_items: list[str]):
         self.orders.append(Order(table_number=table_number, menu_items=menu_items))
 
-    def get_orders(self):
+    def get_orders(self) -> list[Order]:
         return self.orders

@@ -1,11 +1,13 @@
 import argparse
 import os
 from collections import defaultdict
-from typing import Literal, get_args
+from typing import Literal, cast, get_args
 
+import logfire
 from pydantic_ai.models import KnownModelName
 
-from ai_framework_demo.pydanticai.run import run_pydanticai
+from ai_framework_demo.pydanticai.agent import PydanticAIAgentRunner
+from ai_framework_demo.run_agent import run_agent
 
 FrameworkChoice = Literal["langchain", "pydanticai"]
 
@@ -13,7 +15,7 @@ FrameworkChoice = Literal["langchain", "pydanticai"]
 def format_model_options() -> str:
     # Group models by provider
     grouped: defaultdict[str, list[str]] = defaultdict(list)
-    for item in get_args(KnownModelName):
+    for item in cast(tuple[KnownModelName], get_args(KnownModelName)):
         if item == "test" or item.startswith("google-vertex"):
             continue
         provider, model = item.split(":")
@@ -87,10 +89,10 @@ def main() -> None:
         )
 
     if args.framework == "pydanticai":
-
-    else:  # langchain
-        raise NotImplementedError("Langchain implementation coming soon!")
-        run_pydanticai(args)
+        logfire.configure(send_to_logfire="if-token-present", console=None if args.debug else False)
+        run_agent(PydanticAIAgentRunner, args)
+    else:
+        raise ValueError(f"Invalid framework: {args.framework}")
 
 
 if __name__ == "__main__":
