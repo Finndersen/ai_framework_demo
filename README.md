@@ -1,130 +1,37 @@
 # AI Framework Comparison
 
-A comparative analysis of Langchain and PydanticAI frameworks for building AI agents. This project demonstrates how to implement similar AI agent functionality using both frameworks, highlighting their unique approaches and trade-offs.
+Example implementations of a basic AI agent using different frameworks and approaches:
+- Langchain Agent
+- PydanticAI Agent
 
 ## Overview
 
-This project implements parallel AI agents using:
-- **Langchain**: A comprehensive framework for building LLM applications
-- **PydanticAI**: A type-safe framework built on top of Pydantic for AI development
+This project involves implementations of a basic conversational AI agent which acts as a waiter at a restaurant, 
+asking about dietary requirements and taking your order. 
+They aim to demonstrate how the following features can be achieved with each approach:
+- Human-in-the-loop input
+- Tool calling with dependencies
+- Conversation history/memory
+- Structured outputs
 
 ## Requirements
 
-- Python 3.9+
-- OpenAI API key
-
-## Installation
-
-1. Clone the repository:
-```
-git clone https://github.com/yourusername/ai-framework-comparison.git
-cd ai-framework-comparison
-```
-
-2. Create and activate a virtual environment:
-```
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install the package with development dependencies:
-```
-make install
-```
-
-4. Set up your OpenAI API key:
-```
-export OPENAI_API_KEY=your_api_key_here
-```
+- Python 3.11+
+- API key for LLM provider (e.g., OpenAI, Anthropic, Gemini)
 
 ## Usage
 
-Both implementations provide similar interfaces for easy comparison:
-
-```python
-from src.langchain.agent import LangchainAgent
-from src.pydanticai.agent import PydanticAgent
-
-# Using Langchain
-langchain_agent = LangchainAgent()
-result = await langchain_agent.process_query("What's the weather in London?")
-
-# Using PydanticAI
-pydantic_agent = PydanticAgent()
-result = await pydantic_agent.process_query("What's the weather in London?")
+1. Install from the repository:
+```
+pip install git@https://github.com/Finndersen/ai-framework-comparison.git
 ```
 
-## Development
-
-This project uses modern Python development tools:
-
-- **Ruff**: For linting and formatting
-- **Pytest**: For testing
-- **MyPy**: For type checking
-
-Available commands:
-
+2. Run via CLI:
 ```
-make install  # Install development dependencies
-make format   # Format code using ruff
-make lint     # Run linters and type checking
-make test     # Run tests
+python -m ai_framework_comparison <framework> --model=<provider:model_name> --api_key=<api_key>
 ```
 
-## Project Structure
-
-```
-ai_framework_comparison/
-├── src/
-│   ├── langchain/       # Langchain implementation
-│   │   ├── __init__.py
-│   │   └── agent.py
-│   ├── pydanticai/      # PydanticAI implementation
-│   │   ├── __init__.py
-│   │   └── agent.py
-│   ├── services.py      # Shared services
-│   └── __init__.py
-└── tests/               # Test suite
-    ├── __init__.py
-    ├── test_langchain_agent.py
-    └── test_pydantic_agent.py
-```
-
-## Framework Comparison
-
-### Langchain
-**Pros**:
-- Rich ecosystem of tools and integrations
-- Built-in support for agents and chains
-- Large community and extensive documentation
-- Flexible architecture
-
-**Cons**:
-- Can be complex for simple use cases
-- More boilerplate code required
-- Steeper learning curve
-
-### PydanticAI
-**Pros**:
-- Strong type safety through Pydantic
-- Simple, intuitive API
-- Less boilerplate code
-- Familiar to Pydantic users
-
-**Cons**:
-- Newer framework with smaller ecosystem
-- Fewer built-in tools and integrations
-- Limited community resources
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run tests and linting (`make lint test`)
-5. Commit your changes (`git commit -m 'Add amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+Run `python -m ai_framework_comparison -h` for details about the available options.
 
 ## License
 
