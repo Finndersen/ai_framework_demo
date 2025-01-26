@@ -1,18 +1,32 @@
-# AI Framework Comparison
+# AI Agent Framework Comparison
 
-Example implementations of a basic AI agent using different frameworks and approaches:
-- Langchain Agent
-- PydanticAI Agent
+Example implementations of a basic conversational AI agent using different frameworks and approaches:
+- [Langchain](https://github.com/langchain-ai/langchain) Agent
+- [PydanticAI](https://github.com/pydantic/pydantic-ai) Agent
 
 ## Overview
 
-This project involves implementations of a basic conversational AI agent which acts as a waiter at a restaurant, 
+This project includes implementations of a basic conversational AI agent which acts as a waiter at a restaurant, 
 asking about dietary requirements and taking your order. 
 They aim to demonstrate how the following features can be achieved with each approach:
+- Dynamic model choice
 - Human-in-the-loop input
 - Tool calling with dependencies
 - Conversation history/memory
-- Structured outputs
+- Dynamic system prompt
+- Structured output
+
+## Implementations
+### Standard Agents
+These approaches use PydanticAI's `Agent` and LangChain's legacy `AgentExecutor` classes to build the agent,
+implementing the `AgentRunner` [common interface](./src/ai_framework_demo/run_agent.py). 
+
+- PydanticAI implementation: [pydanticai/agent.py](./src/ai_framework_demo/pydantic_ai/agent.py)
+- LangChain implementation: [langchain/agent.py](./src/ai_framework_demo/langchain/agent.py)
+
+### Graph-based Agents
+
+TBC
 
 ## Requirements
 
