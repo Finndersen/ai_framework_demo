@@ -6,6 +6,7 @@ from typing import Literal, cast, get_args
 import logfire
 from pydantic_ai.models import KnownModelName
 
+from ai_framework_demo.langchain.agent import LangchainAgentRunner
 from ai_framework_demo.pydanticai.agent import PydanticAIAgentRunner
 from ai_framework_demo.run_agent import run_agent
 
@@ -91,6 +92,8 @@ def main() -> None:
     if args.framework == "pydanticai":
         logfire.configure(send_to_logfire="if-token-present", console=None if args.debug else False)
         run_agent(PydanticAIAgentRunner, args)
+    elif args.framework == "langchain":
+        run_agent(LangchainAgentRunner, args)
     else:
         raise ValueError(f"Invalid framework: {args.framework}")
 
