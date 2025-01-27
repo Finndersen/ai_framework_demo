@@ -16,6 +16,22 @@ They aim to demonstrate how the following features can be achieved with each app
 - Dynamic system prompt
 - Structured output
 
+## Example Conversation
+
+> **AI Waiter:** Ah, bonjour madame et monsieur! Welcome to Le Bistro, where the food is as delightful as the company! Before we embark on a culinary adventure, might you have any dietary restrictions or preferences? We wouldn't want any rogue ingredients crashing the party!
+
+> **You:** I only eat yellow coloured food
+
+> **AI Waiter:** Magnifique! A connoisseur of the golden hue, I see! Let's explore the menu with your sunshine-filled preference in mind. For appetizers, we have the Quinoa Stuffed Bell Peppers, which are a vibrant yellow. For the main course, the Chickpea and Sweet Potato Curry is a golden delight! And for 
+dessert, the Fresh Fruit Sorbet might have some yellow options depending on the day! What do you think?
+
+> **You:** I'll take the Bell Peppers and fruit sorbet thanks
+
+> **AI Waiter:** Excellent choices! One order of the Quinoa Stuffed Bell Peppers and the Fresh Fruit Sorbet for the discerning palate at table number 1! Your order has been placed, and I shall return with your delectable delights shortly. Au revoir!
+
+> **Order placed:** [Order(menu_items=['Quinoa Stuffed Bell Peppers', 'Fresh Fruit Sorbet'], table_number=1)]
+
+
 ## Implementations
 ### Standard Agents
 These approaches use PydanticAI's `Agent` and LangChain's legacy `AgentExecutor` classes to build the agent,
